@@ -1,0 +1,2 @@
+# khoroch
+Expense manager

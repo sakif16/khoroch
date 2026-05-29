@@ -1,11 +1,77 @@
-import React from 'react'
+import Link from "next/link";
+import React from "react";
 
 const Signup = () => {
   return (
-    <div>
-      Signup Page
-    </div>
-  )
-}
+    <main
+      className="min-h-screen flex items-center justify-center px-4 py-10 sm:px-6 lg:px-8"
+      style={{
+        background: "radial-gradient(circle at top left, rgba(34,197,94,0.12), transparent 18%), radial-gradient(circle at bottom right, rgba(16,185,129,0.08), transparent 20%), rgb(247,244,237)",
+      }}
+    >
+      <div className="w-full max-w-md rounded-3xl border border-slate-200/70 bg-white/95 px-7 py-10 shadow-xl shadow-slate-900/5 backdrop-blur-sm">
+        <div className="space-y-2 text-center">
+          <p className="text-3xl font-semibold tracking-tight text-slate-900">Kharoch</p>
+          <p className="text-sm text-slate-500">Create your account.</p>
+        </div>
 
-export default Signup
+        <form className="mt-10 space-y-6">
+          <div>
+            <label htmlFor="name" className="block text-xs font-semibold uppercase tracking-[0.24em] text-slate-500">
+              Your name
+            </label>
+            <input
+              id="name"
+              name="name"
+              type="text"
+              placeholder="Arif Rahman"
+              className="mt-3 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-slate-400 focus:bg-white focus:ring-2 focus:ring-slate-200"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="email" className="block text-xs font-semibold uppercase tracking-[0.24em] text-slate-500">
+              Email
+            </label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              placeholder="you@example.com"
+              className="mt-3 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-slate-400 focus:bg-white focus:ring-2 focus:ring-slate-200"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="password" className="block text-xs font-semibold uppercase tracking-[0.24em] text-slate-500">
+              Password
+            </label>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              placeholder="Min 4 characters"
+              className="mt-3 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-slate-400 focus:bg-white focus:ring-2 focus:ring-slate-200"
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="mt-4 flex w-full items-center justify-center rounded-2xl bg-slate-950 px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-slate-800"
+          >
+            Create account →
+          </button>
+        </form>
+
+        <p className="mt-6 text-center text-sm text-slate-500">
+          Already have an account?{' '}
+          <Link href="/Signin" className="font-semibold text-slate-950 hover:text-slate-700">
+            Sign in
+          </Link>
+        </p>
+      </div>
+    </main>
+  );
+};
+
+export default Signup;

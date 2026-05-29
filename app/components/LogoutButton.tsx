@@ -2,6 +2,7 @@
 
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 
 const LogoutButton = () => {
     const router = useRouter()
@@ -9,7 +10,7 @@ const LogoutButton = () => {
         await authClient.signOut({
         fetchOptions: {
         onSuccess: () => {
-        router.push("/Signin"); // redirect to login page
+        redirect('/Signin') // redirect to login page
     },
   },
 });

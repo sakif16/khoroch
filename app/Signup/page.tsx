@@ -1,7 +1,43 @@
+'use client'
+
+
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
+import { authClient } from "@/lib/auth-client";
+import { redirect } from "next/navigation";
 
 const Signup = () => {
+
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+
+  async function handleSubmit(e:any){
+    e.preventDefault()
+    const { data, error } = await authClient.signUp.email({
+        email: email, // user email address
+        password: password, // user password -> min 8 characters by default
+        name: name, // user display name// User image URL (optional)
+        callbackURL: "/Dashboard",
+    }, {
+        onRequest: (ctx) => {
+            //show loading
+        },
+        onSuccess: (ctx) => {
+            redirect("/Dashboard")
+        },
+        onError: (ctx) => {
+            // display the error message
+            alert(ctx.error.message);
+        },
+});
+
+
+
+  }
+
+
   return (
     <main
       className="min-h-screen flex items-center justify-center px-4 py-10 sm:px-6 lg:px-8"
@@ -15,7 +51,7 @@ const Signup = () => {
           <p className="text-sm text-slate-500">Create your account.</p>
         </div>
 
-        <form className="mt-10 space-y-6">
+        <form onSubmit={handleSubmit} className="mt-10 space-y-6">
           <div>
             <label htmlFor="name" className="block text-xs font-semibold uppercase tracking-[0.24em] text-slate-500">
               Your name
@@ -24,7 +60,9 @@ const Signup = () => {
               id="name"
               name="name"
               type="text"
-              placeholder="Arif Rahman"
+              placeholder="Your name"
+              value={name}
+              onChange={(e)=>setName(e.target.value)}
               className="mt-3 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-slate-400 focus:bg-white focus:ring-2 focus:ring-slate-200"
             />
           </div>
@@ -38,6 +76,8 @@ const Signup = () => {
               name="email"
               type="email"
               placeholder="you@example.com"
+              value={email}
+              onChange={(e)=>setEmail(e.target.value)}
               className="mt-3 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-slate-400 focus:bg-white focus:ring-2 focus:ring-slate-200"
             />
           </div>
@@ -51,6 +91,8 @@ const Signup = () => {
               name="password"
               type="password"
               placeholder="Min 4 characters"
+              value={password}
+              onChange={(e)=>setPassword(e.target.value)}
               className="mt-3 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-slate-400 focus:bg-white focus:ring-2 focus:ring-slate-200"
             />
           </div>

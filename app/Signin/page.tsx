@@ -2,8 +2,29 @@
 
 
 import Link from "next/link";
+import { useState } from "react";
+import { authClient } from "@/lib/auth-client";
 
 const Signin = () => {
+
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+
+  async function handleSubmit(e:any)  {
+    e.preventDefault()
+
+    const { data, error } = await authClient.signIn.email({
+    email: email, // required
+    password: password, // required
+    rememberMe: false,
+    callbackURL: "/Dashboard",
+});
+
+
+  }
+
+
+
   return (
     <main
       className="min-h-screen flex items-center justify-center px-4 py-10 sm:px-6 lg:px-8"
@@ -17,7 +38,7 @@ const Signin = () => {
           <p className="text-sm text-slate-500">Welcome back. Sign in to continue.</p>
         </div>
 
-        <form className="mt-10 space-y-6">
+        <form onSubmit={handleSubmit} className="mt-10 space-y-6">
           <div>
             <label htmlFor="email" className="block text-xs font-semibold uppercase tracking-[0.24em] text-slate-500">
               Email
@@ -27,6 +48,8 @@ const Signin = () => {
               name="email"
               type="email"
               placeholder="you@example.com"
+              value={email}
+              onChange={e=>setEmail(e.target.value)}
               className="mt-3 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-slate-400 focus:bg-white focus:ring-2 focus:ring-slate-200"
             />
           </div>
@@ -40,6 +63,8 @@ const Signin = () => {
               name="password"
               type="password"
               placeholder="Enter your password"
+              value={password}
+              onChange={e=>setPassword(e.target.value)}
               className="mt-3 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-slate-400 focus:bg-white focus:ring-2 focus:ring-slate-200"
             />
           </div>

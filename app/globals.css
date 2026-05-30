@@ -1,45 +1,707 @@
 @import "tailwindcss";
 
+/* ============================================
+   KHAROCH DESIGN SYSTEM
+   ============================================ */
+
 :root {
-  --background: #f7f4ed;
-  --foreground: #171717;
+  /* Backgrounds */
+  --bg:         #F5F2EC;
+  --bg2:        #EDEAE2;
+  --bg3:        #E4E0D6;
+  --surface:    #FDFBF7;
+
+  /* Text */
+  --ink:        #1C1917;
+  --ink2:       #57534E;
+  --ink3:       #A8A29E;
+
+  /* Accent */
+  --accent:       #2D6A4F;
+  --accent-light: #D8EDDF;
+  --accent-mid:   #52B788;
+
+  /* Danger */
+  --danger:       #B45309;
+  --danger-light: #FEF3C7;
+
+  /* Borders */
+  --border:  rgba(28, 25, 23, 0.10);
+  --border2: rgba(28, 25, 23, 0.06);
+
+  /* Typography */
+  --serif: 'Instrument Serif', Georgia, serif;
+  --sans:  'DM Sans', sans-serif;
+  --mono:  'DM Mono', monospace;
+
+  /* Radii */
+  --r:    14px;
+  --r-sm: 8px;
+
+  /* Shadows */
+  --shadow:    0 1px 3px rgba(28,25,23,0.08), 0 1px 2px rgba(28,25,23,0.04);
+  --shadow-md: 0 4px 16px rgba(28,25,23,0.10), 0 2px 6px rgba(28,25,23,0.06);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ============================================
+   BASE
+   ============================================ */
+
+html, body {
+  height: 100%;
+  overflow: hidden;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-* {
-  box-sizing: border-box;
-}
-
-html {
-  min-height: 100%;
-}
 
 body {
-  margin: 0;
-  min-height: 100vh;
-  background: radial-gradient(circle at top left, rgba(255, 235, 205, 0.25), transparent 18%),
-    radial-gradient(circle at bottom right, rgba(245, 230, 180, 0.20), transparent 20%),
-    #f4e9dc;
-  color: var(--foreground);
-  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-button,
-input,
-select,
-textarea {
-  font: inherit;
+/* ============================================
+   TYPOGRAPHY
+   ============================================ */
+
+.k-serif       { font-family: var(--serif); }
+.k-sans        { font-family: var(--sans); }
+.k-mono        { font-family: var(--mono); }
+
+/* Colors */
+.k-ink         { color: var(--ink); }
+.k-ink2        { color: var(--ink2); }
+.k-ink3        { color: var(--ink3); }
+.k-accent      { color: var(--accent); }
+.k-accent-mid  { color: var(--accent-mid); }
+.k-danger      { color: var(--danger); }
+
+/* Page title — serif large */
+.k-page-title {
+  font-family: var(--serif);
+  font-size: 1.9rem;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  line-height: 1.2;
 }
+
+.k-page-title small {
+  display: block;
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--ink3);
+  font-weight: 400;
+  margin-bottom: 2px;
+  letter-spacing: 0;
+}
+
+/* Section label */
+.k-label {
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink3);
+}
+
+/* Stat value — big serif number */
+.k-stat-value {
+  font-family: var(--serif);
+  font-size: 2rem;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.k-stat-value .k-currency {
+  font-size: 1.1rem;
+  color: var(--ink3);
+  font-family: var(--sans);
+}
+
+/* ============================================
+   LAYOUT
+   ============================================ */
+
+.k-app-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ============================================
+   SIDEBAR
+   ============================================ */
+
+.k-sidebar {
+  width: 240px;
+  flex-shrink: 0;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.k-sidebar-logo {
+  padding: 1.75rem 1.5rem 1.25rem;
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  border-bottom: 1px solid var(--border2);
+  margin-bottom: 0.75rem;
+}
+
+.k-sidebar-logo span {
+  color: var(--accent);
+  font-style: italic;
+}
+
+.k-sidebar-section {
+  padding: 0 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.k-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--ink2);
+  transition: all 0.12s;
+  user-select: none;
+}
+
+.k-nav-item:hover  { background: var(--bg2); color: var(--ink); }
+.k-nav-item.active { background: var(--ink); color: #fff; }
+
+.k-sidebar-user {
+  margin-top: auto;
+  padding: 1rem;
+  border-top: 1px solid var(--border2);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ============================================
+   MAIN CONTENT
+   ============================================ */
+
+.k-main {
+  flex: 1;
+  min-width: 0;
+  padding: 2rem 2.5rem;
+  overflow-y: auto;
+}
+
+.k-page-header {
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+/* ============================================
+   CARDS
+   ============================================ */
+
+.k-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.k-card-header {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.k-card-body {
+  padding: 1.25rem 1.5rem;
+}
+
+/* Stat card */
+.k-stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 1.25rem 1.5rem;
+  box-shadow: var(--shadow);
+}
+
+.k-stat-card.accent {
+  border-left: 3px solid var(--accent);
+}
+
+.k-stat-label {
+  font-size: 12px;
+  color: var(--ink3);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 6px;
+}
+
+.k-stat-sub {
+  font-size: 12px;
+  color: var(--ink3);
+  margin-top: 6px;
+}
+
+/* ============================================
+   AVATARS
+   ============================================ */
+
+.k-avatar {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 500;
+  flex-shrink: 0;
+}
+
+.k-avatar-sm {
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; font-weight: 500;
+  flex-shrink: 0;
+}
+
+.k-av-green { background: var(--accent-light); color: var(--accent); }
+.k-av-amber { background: #FEF3C7;             color: #92400E; }
+.k-av-blue  { background: #DBEAFE;             color: #1E40AF; }
+.k-av-rose  { background: #FFE4E6;             color: #9F1239; }
+
+/* ============================================
+   BADGES
+   ============================================ */
+
+.k-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 99px;
+  font-weight: 500;
+}
+
+.k-badge-green { background: var(--accent-light); color: var(--accent); }
+.k-badge-amber { background: #FEF3C7;             color: #92400E; }
+.k-badge-blue  { background: #DBEAFE;             color: #1E40AF; }
+.k-badge-gray  { background: var(--bg2);          color: var(--ink2); }
+.k-badge-rose  { background: #FFE4E6;             color: #9F1239; }
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+
+.k-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 11px 20px;
+  border-radius: var(--r-sm);
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: all 0.15s;
+  text-decoration: none;
+}
+
+.k-btn-primary {
+  background: var(--ink);
+  color: #fff;
+  width: 100%;
+  padding: 13px 20px;
+  border-radius: var(--r-sm);
+  font-size: 15px;
+}
+
+.k-btn-primary:hover {
+  background: #2C2723;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(28,25,23,0.2);
+}
+
+.k-btn-ghost {
+  background: transparent;
+  color: var(--ink2);
+  border: 1px solid var(--border);
+  font-size: 13px;
+}
+
+.k-btn-ghost:hover { background: var(--bg2); }
+
+.k-btn-accent {
+  background: var(--accent);
+  color: #fff;
+}
+
+.k-btn-accent:hover { background: #245A42; }
+
+/* ============================================
+   FORM FIELDS
+   ============================================ */
+
+.k-field { margin-bottom: 1rem; }
+
+.k-field label {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink2);
+  margin-bottom: 6px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.k-input {
+  width: 100%;
+  padding: 11px 14px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--ink);
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.k-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(45,106,79,0.12);
+}
+
+/* ============================================
+   EXPENSE ITEM
+   ============================================ */
+
+.k-expense-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border2);
+}
+
+.k-expense-item:last-child { border-bottom: none; }
+
+.k-exp-icon {
+  width: 38px; height: 38px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 17px; flex-shrink: 0;
+}
+
+/* Category icon backgrounds */
+.k-cat-food      { background: #FEF9EC; }
+.k-cat-utils     { background: #ECFDF5; }
+.k-cat-transport { background: #FFF7ED; }
+.k-cat-health    { background: #FFF1F2; }
+.k-cat-education { background: #EFF6FF; }
+.k-cat-other     { background: var(--bg2); }
+
+.k-exp-name   { font-size: 14px; font-weight: 500; color: var(--ink); }
+.k-exp-meta   { font-size: 12px; color: var(--ink3); display: flex; align-items: center; gap: 6px; margin-top: 1px; }
+.k-exp-amount { font-size: 14px; font-weight: 500; color: var(--ink); font-family: var(--mono); white-space: nowrap; }
+.k-exp-mine   { color: var(--accent); }
+
+/* ============================================
+   BAR CHART ROWS
+   ============================================ */
+
+.k-bar-row { margin-bottom: 14px; }
+.k-bar-row:last-child { margin-bottom: 0; }
+
+.k-bar-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+  font-size: 13px;
+}
+
+.k-bar-label-left  { color: var(--ink2); display: flex; align-items: center; gap: 7px; }
+.k-bar-label-right { font-weight: 500; color: var(--ink); font-family: var(--mono); }
+
+.k-bar-track {
+  height: 7px;
+  background: var(--bg2);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.k-bar-fill {
+  height: 100%;
+  border-radius: 99px;
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================
+   MONTH NAV
+   ============================================ */
+
+.k-month-nav { display: flex; align-items: center; gap: 8px; }
+
+.k-month-btn {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  width: 30px; height: 30px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--ink2);
+  font-size: 14px;
+  transition: all 0.12s;
+}
+
+.k-month-btn:hover { background: var(--bg2); }
+
+.k-month-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+  min-width: 100px;
+  text-align: center;
+}
+
+/* ============================================
+   MEMBER ROW
+   ============================================ */
+
+.k-member-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border2);
+}
+
+.k-member-row:last-child { border-bottom: none; }
+
+.k-member-name  { font-size: 14px; font-weight: 500; color: var(--ink); }
+.k-member-count { font-size: 12px; color: var(--ink3); }
+.k-member-total { font-size: 15px; font-weight: 500; color: var(--ink); font-family: var(--mono); }
+.k-member-pct   { font-size: 11px; color: var(--ink3); }
+
+/* ============================================
+   FAMILY CODE BOX
+   ============================================ */
+
+.k-code-box {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  padding: 1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.k-family-code {
+  font-family: var(--mono);
+  font-size: 1.4rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: var(--ink);
+}
+
+/* ============================================
+   AUTH CARD
+   ============================================ */
+
+.k-auth-wrap {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: var(--bg);
+  position: relative;
+  overflow: hidden;
+}
+
+.k-auth-wrap::before {
+  content: '';
+  position: absolute;
+  top: -20%; left: -10%;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(82,183,136,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.k-auth-wrap::after {
+  content: '';
+  position: absolute;
+  bottom: -20%; right: -10%;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(82,183,136,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.k-auth-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 3rem 2.5rem;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: var(--shadow-md);
+  position: relative;
+  z-index: 1;
+  animation: k-fadeUp 0.4s ease both;
+}
+
+@keyframes k-fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.k-logo {
+  font-family: var(--serif);
+  font-size: 2rem;
+  color: var(--ink);
+  margin-bottom: 0.25rem;
+  letter-spacing: -0.02em;
+}
+
+.k-logo span { color: var(--accent); font-style: italic; }
+
+/* ============================================
+   MODAL
+   ============================================ */
+
+.k-modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(28,25,23,0.4);
+  z-index: 100;
+  display: flex; align-items: center; justify-content: center;
+  padding: 1rem;
+  animation: k-fadeIn 0.2s ease both;
+}
+
+.k-modal {
+  background: var(--surface);
+  border-radius: 20px;
+  width: 100%; max-width: 480px;
+  box-shadow: 0 20px 60px rgba(28,25,23,0.2);
+  animation: k-slideUp 0.25s ease both;
+  overflow: hidden;
+}
+
+@keyframes k-slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes k-fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.k-modal-header {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.k-modal-title  { font-size: 16px; font-weight: 500; color: var(--ink); }
+.k-modal-body   { padding: 1.5rem; }
+.k-modal-footer {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--border2);
+  display: flex; gap: 8px; justify-content: flex-end;
+}
+
+/* ============================================
+   TOAST
+   ============================================ */
+
+.k-toast {
+  position: fixed; bottom: 2rem; right: 2rem;
+  background: var(--ink); color: #fff;
+  padding: 10px 18px; border-radius: 10px;
+  font-size: 13px; font-weight: 500;
+  z-index: 1000;
+  box-shadow: var(--shadow-md);
+  animation: k-toastIn 0.25s ease both;
+}
+
+@keyframes k-toastIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================
+   DIVIDER
+   ============================================ */
+
+.k-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 1.5rem 0;
+  font-size: 12px;
+  color: var(--ink3);
+}
+
+.k-divider::before, .k-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ============================================
+   EMPTY STATE
+   ============================================ */
+
+.k-empty {
+  text-align: center;
+  padding: 3rem 2rem;
+  color: var(--ink3);
+}
+
+.k-empty-icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
+.k-empty p    { font-size: 14px; }
+
+/* ============================================
+   UTILITY OVERRIDES
+   ============================================ */
+
+.k-surface    { background: var(--surface); }
+.k-bg         { background: var(--bg); }
+.k-bg2        { background: var(--bg2); }
+.k-border     { border-color: var(--border); }
+.k-border2    { border-color: var(--border2); }
+.k-shadow     { box-shadow: var(--shadow); }
+.k-shadow-md  { box-shadow: var(--shadow-md); }
+.k-radius     { border-radius: var(--r); }
+.k-radius-sm  { border-radius: var(--r-sm); }

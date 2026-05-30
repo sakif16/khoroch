@@ -2,25 +2,25 @@
 
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
-import { redirect } from "next/navigation";
 
 const LogoutButton = () => {
-    const router = useRouter()
-    async function handleLogout() {
-        await authClient.signOut({
-        fetchOptions: {
-        onSuccess: () => {
-        redirect('/Signin') // redirect to login page
-    },
-  },
-});
-    }
+  const router = useRouter();
+
+  async function handleLogout() {
+    await authClient.signOut();
+
+    router.push('/Signin');
+    router.refresh();
+  }
 
   return (
-    <div >
-      <button className="cursor-pointer" onClick={handleLogout}>Logout</button>
-    </div>
-  )
-}
+    <button
+      className="k-btn k-btn-ghost cursor-pointer"
+      onClick={handleLogout}
+    >
+      Logout
+    </button>
+  );
+};
 
-export default LogoutButton
+export default LogoutButton;

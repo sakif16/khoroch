@@ -3,10 +3,13 @@
 import Link from "next/link";
 import { useState } from "react";
 import { authClient } from "@/lib/auth-client";
+import { useRouter } from "next/navigation";
+
 
 const Signin = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const router = useRouter()
 
   async function handleSubmit(e: any) {
     e.preventDefault()
@@ -14,7 +17,12 @@ const Signin = () => {
       email,
       password,
       rememberMe: false,
-      callbackURL: "/Dashboard",
+    },{
+      onSuccess: () => {
+        router.push('/Dashboard')
+        router.refresh()
+      },
+      onError: (ctx) => { alert(ctx.error.message) },
     })
   }
 

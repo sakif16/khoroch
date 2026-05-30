@@ -3,12 +3,14 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import { authClient } from "@/lib/auth-client";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
+
 
 const Signup = () => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const router = useRouter()
 
   async function handleSubmit(e: any) {
     e.preventDefault()
@@ -16,9 +18,11 @@ const Signup = () => {
       email,
       password,
       name,
-      callbackURL: "/Dashboard",
     }, {
-      onSuccess: () => { redirect("/Dashboard") },
+      onSuccess: () => {
+        router.push('/Dashboard')
+        router.refresh()
+      },
       onError: (ctx) => { alert(ctx.error.message) },
     })
   }

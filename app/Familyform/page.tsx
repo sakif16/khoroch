@@ -46,7 +46,7 @@ const FamilyForm = () => {
         }),
       })
 
-      router.push("/dashboard")
+      router.push("/Dashboard")
 
     } catch (err) {
       console.error(err)

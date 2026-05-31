@@ -2,13 +2,36 @@
 
 import { useState } from "react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
+
 
 const JoinFamily = () => {
   const [code, setCode] = useState('')
-
+  const router = useRouter()
   async function handleSubmit(e: any) {
     e.preventDefault()
-    // TODO: call server action here
+    try {
+    const res = await fetch("/api/family/join", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        code,
+      }),
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      throw new Error(data.error);
+    }
+
+    router.push("/Dashboard");
+  } catch (err) {
+    console.error(err);
+    alert("Invalid family code");
+  }
   }
 
   return (

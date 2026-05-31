@@ -28,7 +28,7 @@ const Dashboard = async () => {
   const mySharePct = 0
 
   // If no family, redirect to family page to create/join one
-  if (!familyId) redirect('/Family')
+  if (!session.user.familyId) redirect('/Family')
 
   return (
     <div className="k-main" style={{ background: 'var(--bg)', minHeight: '100vh' }}>
@@ -42,12 +42,7 @@ const Dashboard = async () => {
           </div>
         </div>
 
-        {/* Month nav */}
-        <div className="k-month-nav">
-          <button className="k-month-btn">‹</button>
-          <span className="k-month-label">{monthLabel(viewMonth)}</span>
-          <button className="k-month-btn">›</button>
-        </div>
+
       </div>
 
       {/* ── Stat cards ── */}

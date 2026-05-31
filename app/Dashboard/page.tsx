@@ -2,6 +2,8 @@ import { auth } from "@/lib/auth"
 import { headers } from "next/headers"
 import { redirect } from "next/navigation"
 import Link from "next/link"
+import { AddExpenseButton } from "../components/AddExpenseButton"
+import Family from "@/models/Family"
 
 const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December']
 
@@ -11,7 +13,6 @@ function monthLabel(m: string) {
 }
 
 const Dashboard = async () => {
-
   const session = await auth.api.getSession({
     headers: await headers()
   })
@@ -19,13 +20,14 @@ const Dashboard = async () => {
   if (!session) redirect('/Signin')
 
   // TODO: replace with real DB queries
-  const familyId = null         // null = user has no family yet
+  const familyId = session.user.familyId        // null = user has no family yet
   const viewMonth = '2026-05'
   const myTotal = 0
   const famTotal = 0
   const myExpenseCount = 0
   const famExpenseCount = 0
   const mySharePct = 0
+  const family = await Family.findById(familyId).lean() as any
 
   // If no family, redirect to family page to create/join one
   if (!session.user.familyId) redirect('/Family')
@@ -38,7 +40,7 @@ const Dashboard = async () => {
         <div>
           <div className="k-page-title">
             <small>Dashboard</small>
-            Family name
+            {family.name}
           </div>
         </div>
 
@@ -81,14 +83,7 @@ const Dashboard = async () => {
         <div className="k-card">
           <div className="k-card-header">
             <span>Recent expenses</span>
-            <button
-              className="k-btn k-btn-ghost"
-              style={{ fontSize: 12, padding: '6px 12px' }}
-              disabled
-              title="Join or create a family first"
-            >
-              + Add
-            </button>
+            <AddExpenseButton/>
           </div>
           <div className="k-card-body">
             <div className="k-empty">

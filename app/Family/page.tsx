@@ -73,13 +73,6 @@ const FamilyPage = async () => {
   return (
     <div className="k-main" style={{ background: 'var(--bg)', minHeight: '100vh' }}>
 
-      {/* Page header */}
-      <div className="k-page-header">
-        <div className="k-page-title">
-          <small>Your group</small>
-          {family.name}
-        </div>
-      </div>
 
       {/* Family name + code — centered */}
       <div style={{

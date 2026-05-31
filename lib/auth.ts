@@ -13,4 +13,16 @@ export const auth = betterAuth({
     emailAndPassword: { 
     enabled: true, 
   }, 
+
+  user:{
+    additionalFields:{
+      familyId:{
+        type:"string",
+        required:false,
+        defaultValue: null,
+
+      },
+    },
+  },
+
 });

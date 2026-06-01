@@ -3,34 +3,55 @@
 import { useState } from "react"
 
 const CATEGORIES = [
-  { id: 'food',      label: 'Food',      emoji: '🛒' },
-  { id: 'utils',     label: 'Utilities', emoji: '⚡' },
-  { id: 'transport', label: 'Transport', emoji: '🚌' },
-  { id: 'health',    label: 'Health',    emoji: '💊' },
+  { id: 'food', label: 'Food', emoji: '🛒' },
+  { id: 'acc', label: 'Accessories', emoji: '💄' },
+  { id: 'transport', label: 'Transportation', emoji: '🚌' },
+  { id: 'health', label: 'Health', emoji: '💊' },
   { id: 'education', label: 'Education', emoji: '📚' },
-  { id: 'other',     label: 'Other',     emoji: '📦' },
+  { id: 'other', label: 'Other', emoji: '📦' },
 ]
+
+const CATEGORY_MAP: Record<string, string> = {
+  food: "Food",
+  acc: "Accessories",
+  transport: "Transportation",
+  health: "Health",
+  education: "Education",
+  other: "Other",
+}
 
 interface AddExpenseModalProps {
   onClose: () => void
   onSubmit: (data: {
+    title: string
     amount: number
-    description: string
     category: string
-    date: string
+    expenseDate: string
   }) => void
 }
 
 export function AddExpenseModal({ onClose, onSubmit }: AddExpenseModalProps) {
-  const [amount, setAmount]           = useState('')
-  const [description, setDescription] = useState('')
-  const [category, setCategory]       = useState('')
-  const [date, setDate]               = useState(new Date().toISOString().split('T')[0])
+  const [title, setTitle] = useState('')
+  const [amount, setAmount] = useState('')
+  const [category, setCategory] = useState('')
+  const [date, setDate] = useState(
+    new Date().toISOString().split('T')[0]
+  )
 
-  function handleSubmit(e: any) {
+  function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    // TODO: wire up onSubmit with your backend logic
-    onSubmit({ amount: parseFloat(amount), description, category, date })
+
+    if (!category) return
+
+    const payload = {
+      title,
+      amount: Number(amount),
+      category: CATEGORY_MAP[category],
+      expenseDate: date,
+    }
+
+    onSubmit(payload)
+    onClose()
   }
 
   return (
@@ -39,7 +60,8 @@ export function AddExpenseModal({ onClose, onSubmit }: AddExpenseModalProps) {
       <div
         onClick={onClose}
         style={{
-          position: 'fixed', inset: 0,
+          position: 'fixed',
+          inset: 0,
           background: 'rgba(28,25,23,0.4)',
           zIndex: 100,
           animation: 'k-fadeIn 0.2s ease both',
@@ -74,10 +96,11 @@ export function AddExpenseModal({ onClose, onSubmit }: AddExpenseModalProps) {
             <button
               onClick={onClose}
               style={{
-                background: 'none', border: 'none',
-                cursor: 'pointer', fontSize: 20,
-                color: 'var(--ink3)', lineHeight: 1,
-                padding: 2,
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+                fontSize: 20,
+                color: 'var(--ink3)',
               }}
             >
               ×
@@ -88,11 +111,23 @@ export function AddExpenseModal({ onClose, onSubmit }: AddExpenseModalProps) {
           <form onSubmit={handleSubmit}>
             <div className="k-modal-body" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
 
-              {/* Amount */}
-              <div className="k-field" style={{ marginBottom: 0 }}>
-                <label htmlFor="amount">Amount (৳)</label>
+              {/* Title */}
+              <div className="k-field">
+                <label>Title</label>
                 <input
-                  id="amount"
+                  type="text"
+                  className="k-input"
+                  placeholder="e.g. Grocery, Uber, Tuition"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  required
+                />
+              </div>
+
+              {/* Amount */}
+              <div className="k-field">
+                <label>Amount (৳)</label>
+                <input
                   type="number"
                   min="0"
                   className="k-input"
@@ -103,23 +138,10 @@ export function AddExpenseModal({ onClose, onSubmit }: AddExpenseModalProps) {
                 />
               </div>
 
-              {/* Description */}
-              <div className="k-field" style={{ marginBottom: 0 }}>
-                <label htmlFor="description">Description</label>
-                <input
-                  id="description"
-                  type="text"
-                  className="k-input"
-                  placeholder="What did you spend on?"
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                  required
-                />
-              </div>
-
               {/* Category */}
-              <div className="k-field" style={{ marginBottom: 0 }}>
+              <div className="k-field">
                 <label>Category</label>
+
                 <div style={{
                   display: 'grid',
                   gridTemplateColumns: 'repeat(3, 1fr)',
@@ -136,20 +158,13 @@ export function AddExpenseModal({ onClose, onSubmit }: AddExpenseModalProps) {
                         border: category === cat.id
                           ? '1.5px solid var(--ink)'
                           : '1px solid var(--border)',
-                        borderRadius: 'var(--r-sm)',
+                        borderRadius: 10,
                         background: category === cat.id ? 'var(--ink)' : 'var(--bg)',
                         color: category === cat.id ? '#fff' : 'var(--ink2)',
-                        fontSize: 13,
-                        fontWeight: 500,
                         cursor: 'pointer',
-                        textAlign: 'center',
-                        transition: 'all 0.12s',
-                        fontFamily: 'var(--sans)',
                       }}
                     >
-                      <span style={{ display: 'block', fontSize: 18, marginBottom: 4 }}>
-                        {cat.emoji}
-                      </span>
+                      <div style={{ fontSize: 18 }}>{cat.emoji}</div>
                       {cat.label}
                     </button>
                   ))}
@@ -157,10 +172,9 @@ export function AddExpenseModal({ onClose, onSubmit }: AddExpenseModalProps) {
               </div>
 
               {/* Date */}
-              <div className="k-field" style={{ marginBottom: 0 }}>
-                <label htmlFor="date">Date</label>
+              <div className="k-field">
+                <label>Date</label>
                 <input
-                  id="date"
                   type="date"
                   className="k-input"
                   value={date}
@@ -173,18 +187,11 @@ export function AddExpenseModal({ onClose, onSubmit }: AddExpenseModalProps) {
 
             {/* Footer */}
             <div className="k-modal-footer">
-              <button
-                type="button"
-                className="k-btn k-btn-ghost"
-                onClick={onClose}
-              >
+              <button type="button" onClick={onClose} className="k-btn k-btn-ghost">
                 Cancel
               </button>
-              <button
-                type="submit"
-                className="k-btn k-btn-primary"
-                style={{ width: 'auto', padding: '10px 28px', marginTop: 0 }}
-              >
+
+              <button type="submit" className="k-btn k-btn-primary">
                 Add →
               </button>
             </div>

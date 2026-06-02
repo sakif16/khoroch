@@ -3,11 +3,13 @@
 import { useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-
+import { redirect } from "next/navigation"
+import { authClient } from "@/lib/auth-client"
 
 const JoinFamily = () => {
   const [code, setCode] = useState('')
   const router = useRouter()
+
   async function handleSubmit(e: any) {
     e.preventDefault()
     try {

@@ -68,13 +68,13 @@ const Signin = () => {
             Sign in →
           </button>
 
-          <button
+          {/* <button
             type="button"
             className="k-btn k-btn-ghost"
             style={{ width: '100%', marginTop: '0.5rem', justifyContent: 'center' }}
           >
             Sign in with Google
-          </button>
+          </button> */}
 
         </form>
 

@@ -4,6 +4,7 @@ import { useState } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { authClient } from "@/lib/auth-client"
+import { redirect } from "next/navigation"
 
 const FamilyForm = () => {
   const [name, setName] = useState('')
@@ -13,10 +14,12 @@ const FamilyForm = () => {
   async function handleSubmit(e: any) {
     e.preventDefault()
     setLoading(true)
+    
+
 
     try {
+      
       const session = await authClient.getSession()
-
       const res = await fetch("/api/family/create", {
         method: "POST",
         headers: {

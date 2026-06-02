@@ -31,7 +31,7 @@ const Signin = () => {
       <div className="k-auth-card">
 
         {/* Logo */}
-        <div className="k-logo">Kha<span>roch</span></div>
+        <div className="k-logo">Kho<span>roch</span></div>
         <p style={{ fontSize: 13, color: 'var(--ink3)', marginBottom: '2rem' }}>
           Welcome back. Sign in to continue.
         </p>

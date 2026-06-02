@@ -59,7 +59,7 @@ const FamilyForm = () => {
     <div className="k-auth-wrap">
       <div className="k-auth-card">
 
-        <div className="k-logo">Kha<span>roch</span></div>
+        <div className="k-logo">Kho<span>roch</span></div>
 
         <p style={{ fontSize: 13, color: 'var(--ink3)', marginBottom: '2rem' }}>
           Name your family group.

@@ -32,7 +32,7 @@ const Signup = () => {
       <div className="k-auth-card">
 
         {/* Logo */}
-        <div className="k-logo">Kha<span>roch</span></div>
+        <div className="k-logo">Kho<span>roch</span></div>
         <p style={{ fontSize: 13, color: 'var(--ink3)', marginBottom: '2rem' }}>
           Create your account.
         </p>
@@ -45,7 +45,7 @@ const Signup = () => {
               id="name"
               type="text"
               className="k-input"
-              placeholder="Arif Rahman"
+              placeholder="Your name"
               value={name}
               onChange={(e) => setName(e.target.value)}
               required

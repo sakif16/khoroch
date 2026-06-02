@@ -26,7 +26,7 @@ const Navbar = async () => {
       {/* Left — Logo (always) */}
       <div className="k-logo" style={{ fontSize: '1.25rem', marginBottom: 0 }}>
         <Link href="/" style={{ textDecoration: 'none', color: 'inherit' }}>
-          Kha<span>roch</span>
+          Kho<span>roch</span>
         </Link>
       </div>
 

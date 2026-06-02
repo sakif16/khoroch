@@ -39,7 +39,7 @@ const JoinFamily = () => {
       <div className="k-auth-card">
 
         {/* Header */}
-        <div className="k-logo">Kha<span>roch</span></div>
+        <div className="k-logo">Kho<span>roch</span></div>
         <p style={{ fontSize: 13, color: 'var(--ink3)', marginBottom: '2rem' }}>
           Enter your family code to join.
         </p>

@@ -1,36 +1,89 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Khoroch
+## Intro
+A family expense tracking web app where members can join a shared group, log their spending, and view each other's expenses transparently — month by month.
 
-## Getting Started
+---
 
-First, run the development server:
+## Description
+Khoroch (খরচ) is a full-stack web application built for families who want to track their collective monthly expenses. After signing up, a user can create a family group or join one using a shared code. Once inside, every member can log their own expenses, and the entire family can see the breakdown — by member and by category.
 
+## Website: https://khoroch.onrender.com/
+
+### What you can do:
+- Sign up and sign in with email and password
+- Create a family group with a unique auto-generated code
+- Join an existing family using the shared code
+- Log expenses with a title, amount, category, and date
+- View your personal spending stats for the current month
+- See the full family total and your percentage share
+- Browse recent expenses logged by all family members
+- View member-wise and category-wise spending breakdowns
+
+---
+
+## Tech Stack
+- **Next.js** (App Router)
+- **TypeScript**
+- **Tailwind CSS**
+- **BetterAuth** (authentication & user management)
+- **MongoDB** (database)
+- **Mongoose** (schemas)
+- **Render** (deployment)
+
+---
+
+
+## Contributions
+Contributions are welcome!
+
+### You can contribute by:
+- Reporting bugs or issues
+- Suggesting new features or improvements
+- Refactoring code for better performance or readability
+- Improving the UI or adding responsive design
+- Enhancing documentation
+
+### How to contribute:
+
+### 1) Fork the repository
+
+### 2) Clone your fork
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/YOUR_USERNAME/kharoch.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 3) Create a new branch
+```bash
+git checkout -b feature-name
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 4) Make your changes and commit
+```bash
+git commit -m "Add: your feature description"
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 5) Push to your fork
+```bash
+git push origin feature-name
+```
 
-## Learn More
+### 6) Open a Pull Request on GitHub
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## ⚠️ Known Issues
+- Month navigation not implemented yet
+- No loading states
+- Expense deletion is not yet supported
+- No pagination on the recent expenses list — limited to the last 10 entries
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Future Development
+- Month navigation to browse expenses from past months
+- Expense deletion and editing
+- Push or email notifications when a family member logs an expense
+- Pagination or infinite scroll on the expense list
+- Export expenses as CSV or PDF
+- Charts and visual spending trends over multiple months
+- Dark mode support

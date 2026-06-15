@@ -68,27 +68,9 @@ export function AddExpenseModal({ onClose, onSubmit }: AddExpenseModalProps) {
         }}
       />
 
-      {/* Modal */}
-      <div style={{
-        position: 'fixed',
-        inset: 0,
-        zIndex: 101,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '1rem',
-        pointerEvents: 'none',
-      }}>
-        <div style={{
-          background: 'var(--surface)',
-          borderRadius: 20,
-          width: '100%',
-          maxWidth: 520,
-          boxShadow: '0 20px 60px rgba(28,25,23,0.2)',
-          animation: 'k-slideUp 0.25s ease both',
-          pointerEvents: 'auto',
-          overflow: 'hidden',
-        }}>
+      {/* Modal wrapper */}
+      <div className="k-modal-wrapper">
+        <div className="k-modal-box">
 
           {/* Header */}
           <div className="k-modal-header">
@@ -108,7 +90,7 @@ export function AddExpenseModal({ onClose, onSubmit }: AddExpenseModalProps) {
           </div>
 
           {/* Body */}
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className="k-modal-form">
             <div className="k-modal-body" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
 
               {/* Title */}
@@ -142,26 +124,19 @@ export function AddExpenseModal({ onClose, onSubmit }: AddExpenseModalProps) {
               <div className="k-field">
                 <label>Category</label>
 
-                <div style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(3, 1fr)',
-                  gap: 8,
-                  marginTop: 6,
-                }}>
+                <div className="k-category-grid">
                   {CATEGORIES.map((cat) => (
                     <button
                       key={cat.id}
                       type="button"
                       onClick={() => setCategory(cat.id)}
+                      className="k-category-btn"
                       style={{
-                        padding: '10px 8px',
                         border: category === cat.id
                           ? '1.5px solid var(--ink)'
                           : '1px solid var(--border)',
-                        borderRadius: 10,
                         background: category === cat.id ? 'var(--ink)' : 'var(--bg)',
                         color: category === cat.id ? '#fff' : 'var(--ink2)',
-                        cursor: 'pointer',
                       }}
                     >
                       <div style={{ fontSize: 18 }}>{cat.emoji}</div>
@@ -199,6 +174,99 @@ export function AddExpenseModal({ onClose, onSubmit }: AddExpenseModalProps) {
 
         </div>
       </div>
+
+      {/* ── Responsive styles ── */}
+      <style>{`
+        .k-modal-wrapper {
+          position: fixed;
+          inset: 0;
+          z-index: 101;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 1rem;
+          pointer-events: none;
+        }
+
+        .k-modal-box {
+          background: var(--surface);
+          border-radius: 20px;
+          width: 100%;
+          max-width: 520px;
+          max-height: calc(100vh - 2rem);
+          display: flex;
+          flex-direction: column;
+          box-shadow: 0 20px 60px rgba(28,25,23,0.2);
+          animation: k-slideUp 0.25s ease both;
+          pointer-events: auto;
+          overflow: hidden;
+        }
+
+        .k-modal-form {
+          display: flex;
+          flex-direction: column;
+          min-height: 0;
+          overflow: hidden;
+        }
+
+        .k-modal-body {
+          overflow-y: auto;
+          flex: 1;
+          min-height: 0;
+        }
+
+        .k-category-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 8px;
+          margin-top: 6px;
+        }
+
+        .k-category-btn {
+          padding: 10px 8px;
+          border-radius: 10px;
+          cursor: pointer;
+        }
+
+        /* Small laptops / tablets */
+        @media (max-width: 1024px) {
+          .k-modal-wrapper {
+            padding: 0.75rem;
+          }
+
+          .k-modal-box {
+            max-height: calc(100vh - 1.5rem);
+          }
+        }
+
+        /* Phones */
+        @media (max-width: 640px) {
+          .k-modal-wrapper {
+            padding: 0;
+            align-items: flex-end;
+          }
+
+          .k-modal-box {
+            max-width: 100%;
+            width: 100%;
+            border-radius: 20px 20px 0 0;
+            max-height: 92vh;
+          }
+
+          .k-category-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+
+          .k-modal-footer {
+            flex-direction: column-reverse;
+            gap: 0.5rem;
+          }
+
+          .k-modal-footer .k-btn {
+            width: 100%;
+          }
+        }
+      `}</style>
     </>
   )
 }

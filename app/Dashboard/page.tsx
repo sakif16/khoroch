@@ -90,12 +90,7 @@ const Dashboard = async () => {
       </div>
 
       {/* ── Stat cards ── */}
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(3, 1fr)',
-        gap: '1rem',
-        marginBottom: '1.75rem',
-      }}>
+      <div className="k-stat-grid">
         <div className="k-stat-card accent">
           <div className="k-stat-label">Your spending</div>
           <div className="k-stat-value">
@@ -115,7 +110,6 @@ const Dashboard = async () => {
         </div>
 
         <div className="k-stat-card">
-          <div className="k-stat-label">Your share</div>
           <div className="k-stat-value">
             {mySharePct}<span className="k-currency">%</span>
           </div>
@@ -124,12 +118,7 @@ const Dashboard = async () => {
       </div>
 
       {/* ── Main grid ── */}
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: '1fr 380px',
-        gap: '1.5rem',
-        alignItems: 'start',
-      }}>
+      <div className="k-dashboard-grid">
 
         {/* Recent expenses */}
         <div className="k-card">
@@ -145,7 +134,7 @@ const Dashboard = async () => {
                 <p>No expenses yet.</p>
               </div>
             ) : (
-              recentExpenses.map((e) => (
+              recentExpenses.map((e:any) => (
                 <div key={e._id.toString()} className="k-expense-item">
                   <div className="k-exp-info" style={{ flex: 1 }}>
                     <div className="k-exp-name">{e.title}</div>
@@ -229,6 +218,48 @@ const Dashboard = async () => {
 
         </div>
       </div>
+
+      {/* ── Responsive styles ── */}
+      <style>{`
+        .k-stat-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 1rem;
+          margin-bottom: 1.75rem;
+        }
+
+        .k-dashboard-grid {
+          display: grid;
+          grid-template-columns: 1fr 380px;
+          gap: 1.5rem;
+          align-items: start;
+        }
+
+        /* Tablets / small laptops */
+        @media (max-width: 1024px) {
+          .k-dashboard-grid {
+            grid-template-columns: 1fr;
+          }
+        }
+
+        /* Phones */
+        @media (max-width: 640px) {
+          .k-stat-grid {
+            grid-template-columns: 1fr;
+            gap: 0.75rem;
+            margin-bottom: 1.25rem;
+          }
+
+          .k-dashboard-grid {
+            gap: 1rem;
+          }
+
+          .k-page-header {
+            padding-left: 0.25rem;
+            padding-right: 0.25rem;
+          }
+        }
+      `}</style>
 
     </div>
   )

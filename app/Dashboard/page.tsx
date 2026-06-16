@@ -2,9 +2,11 @@ import { auth, db } from "@/lib/auth"
 import { headers } from "next/headers"
 import { redirect } from "next/navigation"
 import { AddExpenseButton } from "../components/AddExpenseButton"
+
 import Expense from "@/models/Expense"
 import Family from "@/models/Family"
 import mongoose from "mongoose"
+import { HistoryButton } from "../components/HistoryButton"
 
 const Dashboard = async () => {
   const session = await auth.api.getSession({
@@ -124,7 +126,10 @@ const Dashboard = async () => {
         <div className="k-card">
           <div className="k-card-header">
             <span>Recent expenses</span>
-            <AddExpenseButton />
+            <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+              <HistoryButton />
+              <AddExpenseButton />
+            </div>
           </div>
 
           <div className="k-card-body" style={{ paddingTop: 0, paddingBottom: '0.5rem' }}>

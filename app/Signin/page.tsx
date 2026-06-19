@@ -16,7 +16,7 @@ const Signin = () => {
     const { data, error } = await authClient.signIn.email({
       email,
       password,
-      rememberMe: false,
+      rememberMe: true,
     },{
       onSuccess: () => {
         router.push('/Dashboard')
